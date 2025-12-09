@@ -1,0 +1,61 @@
+---
+import militaryRevealStart from '../assets/pilot_reveal_test_3D.png';
+import militaryRevealEnd from '../assets/pilot_reveal_test.jpg';
+import { Picture } from 'astro:assets';
+---
+
+<div class="card-container">
+	<div class="reveal-wrapper">
+		<!-- Base image (start) -->
+		<Picture src={militaryRevealStart} alt="Military Reveal Start" width={1200} class="base-image" />
+		
+		<!-- Grid overlay for reveal effect -->
+		<div class="grid-overlay" data-end-image={militaryRevealEnd.src}>
+			<!-- Grid cells will be generated via JS -->
+		</div>
+	</div>
+</div>
+
+<style>
+	.card-container {
+		width: auto;
+		height: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.reveal-wrapper {
+		position: relative;
+		display: inline-block;
+		line-height: 0;
+	}
+	
+	.reveal-wrapper :global(.base-image img) {
+		width: auto;
+		height: auto;
+		display: block;
+		object-fit: cover;
+	}
+	
+	.grid-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: repeat(10, 1fr);
+		pointer-events: none;
+	}
+	
+	.grid-overlay :global(.grid-cell) {
+		background-size: 1200% 1000%; /* 12 cols x 10 rows */
+		opacity: 0;
+		pointer-events: auto;
+		cursor: default;
+	}
+</style>
+
+<script src='../scripts/militaryReveal.js'></script>
